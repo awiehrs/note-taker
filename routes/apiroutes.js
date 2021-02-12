@@ -2,7 +2,7 @@
 const dbJSON = require('../db/db.json');
 const fs = require('fs');
 
-// NPM unqique ID module
+// NPM unique ID module
 module.uniqid_debug = true;
 var uniqid = require('uniqid');
 
@@ -59,7 +59,6 @@ module.exports = (app) => {
                 //Use fs Write file to rewrite / replace the entire contents of db.json
                 fs.writeFile('db/db.json', JSON.stringify(notesDb), (err) => {
                     if (err) throw err;
-                    // Respond with the latest version  of our array by referencing the notesDB variable above, otherwise I think we would need to "read" the file again.   
                     res.json(notesDb);
                 });
             };
@@ -72,7 +71,6 @@ module.exports = (app) => {
         const noteId = req.params.id;
         // Use FS to read the latest version of db.json
         fs.readFile('db/db.json', 'utf8', (err, data) => {
-            // Parse data from db.JSON so we can alter it
             const notesDb = JSON.parse(data);
             if (err) { console.err(err) }
             else {
